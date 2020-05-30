@@ -3,41 +3,55 @@ Overview
 GameLab Team
 5/29/2020
 
-## R Markdown
+## How do sentiment models work?
 
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
+Lexicons thats how, here are 5 randomly sampled words from four popular
+lexicons and then ours
 
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
+    ## # A tibble: 5 x 3
+    ##   word          value type 
+    ##   <chr>         <dbl> <chr>
+    ## 1 green washing    -3 Afinn
+    ## 2 benefitted        2 Afinn
+    ## 3 penalty          -2 Afinn
+    ## 4 treason          -3 Afinn
+    ## 5 poorer           -2 Afinn
 
-``` r
-summary(cars)
-```
+    ## # A tibble: 5 x 3
+    ##   word        sentiment type 
+    ##   <chr>       <chr>     <chr>
+    ## 1 steal       sadness   NRC  
+    ## 2 marvelous   joy       NRC  
+    ## 3 yelp        fear      NRC  
+    ## 4 hygienic    positive  NRC  
+    ## 5 shoplifting negative  NRC
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+    ## # A tibble: 5 x 3
+    ##   word          sentiment type 
+    ##   <chr>         <chr>     <chr>
+    ## 1 broken        negative  Bing 
+    ## 2 invulnerable  positive  Bing 
+    ## 3 lorn          negative  Bing 
+    ## 4 unreliability negative  Bing 
+    ## 5 bogus         negative  Bing
 
-``` r
-head(pressy)
-```
+    ## # A tibble: 5 x 3
+    ##   word          sentiment    type    
+    ##   <chr>         <chr>        <chr>   
+    ## 1 seems         uncertainty  Loughran
+    ## 2 hazard        negative     Loughran
+    ## 3 hereunto      litigious    Loughran
+    ## 4 pretrial      negative     Loughran
+    ## 5 noncancelable constraining Loughran
 
-    ## # A tibble: 6 x 4
-    ##   word      president score occassion
-    ##   <chr>     <chr>     <dbl> <chr>    
-    ## 1 economy   obama         3 SOTU     
-    ## 2 polan     obama         2 SOTU     
-    ## 3 health    obama         2 SOTU     
-    ## 4 education obama         2 SOTU     
-    ## 5 energy    obama         2 SOTU     
-    ## 6 budget    obama         1 SOTU
+    ## # A tibble: 5 x 5
+    ##   word     president score occassion                 type  
+    ##   <chr>    <chr>     <dbl> <chr>                     <chr> 
+    ## 1 fastest  obama         2 SOTU_15                   pressy
+    ## 2 health   obama         2 State of the Union (2011) pressy
+    ## 3 honor    obama         3 Selma                     pressy
+    ## 4 al qaida obama        -5 Usama Bin Laden (2011)    pressy
+    ## 5 school   obama         2 SOTU_15                   pressy
 
 ## Including Plots
 
@@ -45,5 +59,12 @@ You can also embed plots, for example:
 
 ![](README_files/figure-gfm/pressure-1.png)<!-- -->
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+And it is clear that this is a graphic that says some
+stuff.
+
+    ## Warning: Removed 5 rows containing missing values (geom_point).
+
+![](README_files/figure-gfm/description%20of%20what%20is%20up-1.png)<!-- -->
+
+Values of under zero indicate that our analysis was substantially more
+positive than Afinn
