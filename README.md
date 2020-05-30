@@ -25,6 +25,20 @@ summary(cars)
     ##  3rd Qu.:19.0   3rd Qu.: 56.00  
     ##  Max.   :25.0   Max.   :120.00
 
+``` r
+head(pressy)
+```
+
+    ## # A tibble: 6 x 4
+    ##   word      president score occassion
+    ##   <chr>     <chr>     <dbl> <chr>    
+    ## 1 economy   obama         3 SOTU     
+    ## 2 polan     obama         2 SOTU     
+    ## 3 health    obama         2 SOTU     
+    ## 4 education obama         2 SOTU     
+    ## 5 energy    obama         2 SOTU     
+    ## 6 budget    obama         1 SOTU
+
 ## Including Plots
 
 You can also embed plots, for example:
