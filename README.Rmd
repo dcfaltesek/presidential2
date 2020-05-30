@@ -2,7 +2,7 @@
 title: "Overview"
 author: "GameLab Team"
 date: "5/29/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
