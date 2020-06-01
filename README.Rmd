@@ -110,7 +110,10 @@ comparative<-data.frame(balance=hulk$`mean(score).x`-hulk$`mean(score).y`, var=h
 
 # How do sentiment models work?
 
-Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours. Here is where we can add a whole bunch of text. I will use a bunch of the options to really help you see how well this works. ^[Noop norp zorp]
+Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours. Here is where we can add a whole bunch of text. I will :brain: use a bunch of the options to really help you see how well this works. ^[[Obama's Farewell](https://www.presidency.ucsb.edu/documents/farewell-address-the-nation-from-chicago-illinois)]
+
+* amazing
+  + boop
 
 ## Wow
 
@@ -166,7 +169,7 @@ knitr::kable(
 )
 
 knitr::kable(
-  B1[1:2, 1:2], caption = 'A subset of our system.'
+  B1[1:5, 1:2], caption = 'A subset of our system.'
 )
 
 ```
@@ -179,6 +182,14 @@ Here is the big plot that loos super messy.
 ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
 
 ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_line()
+
+knitr::include_graphics(
+  'https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg',
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = TRUE
+)
+
 ```
 
 And it is clear that this is a graphic that says some stuff. 

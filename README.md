@@ -7,8 +7,11 @@ Your names in alphabetical order with Dan
 
 Lexicons thats how, here are 5 randomly sampled words from four popular
 lexicons and then ours. Here is where we can add a whole bunch of text.
-I will use a bunch of the options to really help you see how well this
-works. \[1\]
+I will :brain: use a bunch of the options to really help you see how
+well this works. \[1\]
+
+  - amazing
+      - boop
 
 ## Wow
 
@@ -34,62 +37,65 @@ works. \[1\]
 A subset of our system.
 
     ## # A tibble: 5 x 3
-    ##   word           value type 
-    ##   <chr>          <dbl> <chr>
-    ## 1 tumor             -2 Afinn
-    ## 2 misleading        -3 Afinn
-    ## 3 son-of-a-bitch    -5 Afinn
-    ## 4 willingness        2 Afinn
-    ## 5 favorites          2 Afinn
+    ##   word        value type 
+    ##   <chr>       <dbl> <chr>
+    ## 1 commitment      2 Afinn
+    ## 2 hiding         -1 Afinn
+    ## 3 restricting    -2 Afinn
+    ## 4 sarcastic      -2 Afinn
+    ## 5 imposes        -1 Afinn
 
     ## # A tibble: 5 x 3
-    ##   word      sentiment    type 
-    ##   <chr>     <chr>        <chr>
-    ## 1 twinkle   anticipation NRC  
-    ## 2 deserve   positive     NRC  
-    ## 3 tax       sadness      NRC  
-    ## 4 aggressor negative     NRC  
-    ## 5 arid      sadness      NRC
+    ##   word       sentiment    type 
+    ##   <chr>      <chr>        <chr>
+    ## 1 complexity negative     NRC  
+    ## 2 offset     anticipation NRC  
+    ## 3 evict      sadness      NRC  
+    ## 4 parasite   fear         NRC  
+    ## 5 marry      surprise     NRC
 
     ## # A tibble: 5 x 3
-    ##   word           sentiment type 
-    ##   <chr>          <chr>     <chr>
-    ## 1 proactive      positive  Bing 
-    ## 2 precipitous    negative  Bing 
-    ## 3 disingenuously negative  Bing 
-    ## 4 worthlessly    negative  Bing 
-    ## 5 failed         negative  Bing
+    ##   word         sentiment type 
+    ##   <chr>        <chr>     <chr>
+    ## 1 magnificence positive  Bing 
+    ## 2 irritating   negative  Bing 
+    ## 3 bastards     negative  Bing 
+    ## 4 eccentricity negative  Bing 
+    ## 5 breakups     negative  Bing
 
     ## # A tibble: 5 x 3
-    ##   word           sentiment    type    
-    ##   <chr>          <chr>        <chr>   
-    ## 1 honor          positive     Loughran
-    ## 2 frustrate      negative     Loughran
-    ## 3 mandates       constraining Loughran
-    ## 4 undeterminable uncertainty  Loughran
-    ## 5 nonperformance negative     Loughran
+    ##   word            sentiment   type    
+    ##   <chr>           <chr>       <chr>   
+    ## 1 anticipate      uncertainty Loughran
+    ## 2 monopolize      negative    Loughran
+    ## 3 probationers    litigious   Loughran
+    ## 4 distinctiveness positive    Loughran
+    ## 5 sued            negative    Loughran
 
     ## # A tibble: 5 x 5
-    ##   word     president score occassion                        type  
-    ##   <chr>    <chr>     <dbl> <chr>                            <chr> 
-    ## 1 nation's obama         2 Selma                            pressy
-    ## 2 were     obama        -1 SOTU_15                          pressy
-    ## 3 protect  obama         3 SOTU_15                          pressy
-    ## 4 tragedy  obama        -5 Arizona Shooting Memorial (2011) pressy
-    ## 5 sooting  obama        -5 Arizona Shooting Memorial (2011) pressy
+    ##   word    president score occassion                 type  
+    ##   <chr>   <chr>     <dbl> <chr>                     <chr> 
+    ## 1 moral   obama         2 Selma                     pressy
+    ## 2 serve   obama         1 Usama Bin Laden (2011)    pressy
+    ## 3 economy obama         3 SOTU                      pressy
+    ## 4 will    obama         3 SOTU_15                   pressy
+    ## 5 forget  obama        -1 Immigration Reform (2013) pressy
 
-| word           | value | type  |
-| :------------- | ----: | :---- |
-| tumor          |   \-2 | Afinn |
-| misleading     |   \-3 | Afinn |
-| son-of-a-bitch |   \-5 | Afinn |
+| word        | value | type  |
+| :---------- | ----: | :---- |
+| commitment  |     2 | Afinn |
+| hiding      |   \-1 | Afinn |
+| restricting |   \-2 | Afinn |
 
 A subset of our system.
 
-| word    | sentiment    |
-| :------ | :----------- |
-| twinkle | anticipation |
-| deserve | positive     |
+| word       | sentiment    |
+| :--------- | :----------- |
+| complexity | negative     |
+| offset     | anticipation |
+| evict      | sadness      |
+| parasite   | fear         |
+| marry      | surprise     |
 
 A subset of our system.
 
@@ -98,7 +104,7 @@ A subset of our system.
 Here is the big plot that loos super
 messy.
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->![](README_files/figure-gfm/pressure-2.png)<!-- -->
+![](README_files/figure-gfm/pressure-1.png)<!-- -->![](README_files/figure-gfm/pressure-2.png)<!-- -->![](https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg)<!-- -->
 
 And it is clear that this is a graphic that says some
 stuff.
@@ -114,4 +120,5 @@ Here is a random side note. As you may know, I love this stuff.
 Values of under zero indicate that our analysis was substantially more
 positive than Afinn
 
-1.  Noop norp zorp
+1.  [Obama’s
+    Farewell](https://www.presidency.ucsb.edu/documents/farewell-address-the-nation-from-chicago-illinois)
