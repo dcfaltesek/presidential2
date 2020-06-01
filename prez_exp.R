@@ -41,10 +41,10 @@ freq_by_rank %>%
   geom_line(size = 1.1, alpha = 0.8, show.legend = FALSE) + 
   scale_x_log10() +
   scale_y_log10()
-View(freq_by_rank)
+
 
 freq_by_rank2 %>% 
-  ggplot(aes(rank, `term frequency`, color = reference)) + 
+  ggplot(aes(rank, `term frequency`)) + 
   geom_line(size = 1.1, alpha = 0.8, show.legend = FALSE) + 
   scale_x_log10() +
   scale_y_log10()
@@ -52,7 +52,7 @@ freq_by_rank2 %>%
 
 Zprime<-paragraph_words%>%
   bind_tf_idf(word, reference,n)
-View(Zprime)
+
 
 A<-get_sentiments("afinn")
 B<-get_sentiments("nrc")
@@ -78,8 +78,6 @@ Afinn_final<-Afinn%>%
   summarize(sum(value), sd(value), mean(value))
 
 #code that makes the joins work
-View(prezz_final)
-View(Afinn_final)
 colnames(Afinn_final)[3]<-"sd(score)"
 colnames(Afinn_final)[4]<-"mean(score)"
 Afinn_final<-mutate(Afinn_final, type="Afinn")
@@ -91,8 +89,6 @@ ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
 
 #this makes the result sheet
 hulk<-left_join(Afinn_final, prezz_final, by="reference")
-View(hulk)
-
-comparative<-data.frame(balance=hulk$`mean(score).x`-hulk$`mean(score).y`, var=hulk$`sd(score).x`-hulk$`mean(score).y`)
+comparative<-data.frame(balance=hulk$`mean(score).x`-hulk$`mean(score).y`, var=hulk$`sd(score).x`-hulk$`sd(score).y`)
 View(comparative)
-
+View(hulk)
