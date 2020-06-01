@@ -107,13 +107,32 @@ comparative<-data.frame(balance=hulk$`mean(score).x`-hulk$`mean(score).y`, var=h
 
 ```
 
-## How do sentiment models work?
+# How do sentiment models work?
 
-Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours
+Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours. Here is where we can add a whole bunch of text. I will use a bunch of the options to really help you see how well this works. 
+
+## Wow
+
+### Smaller
+
+*List
+  +item 1
+  +item 2
+  
+Column 1 | Column 2 | Column 3
+---------| -------- | --------
+Obama    | President| Dude
+Bush     | President| Bro
+Biden    | Vice President | Guy
+
+
+
+
 
 ```{r Sentiments}
 A1<-sample_n(A, 5)%>%
   mutate("type"="Afinn")
+
 A1
 B1<-sample_n(B, 5)%>%
   mutate("type"="NRC")
@@ -128,15 +147,20 @@ D1
 E1<-sample_n(pressy, 5)%>%
   mutate("type"="pressy")
 E1
+
+
 ```
+
+
 
 ## Including Plots
 
-You can also embed plots, for example:
+Here is the big plot that loos super messy.
 
 ```{r pressure, echo=FALSE}
 ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
 
+ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_line()
 ```
 
 And it is clear that this is a graphic that says some stuff. 

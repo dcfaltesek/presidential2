@@ -3,61 +3,76 @@ Overview
 GameLab Team
 5/29/2020
 
-## How do sentiment models work?
+# How do sentiment models work?
 
 Lexicons thats how, here are 5 randomly sampled words from four popular
-lexicons and then ours
+lexicons and then ours. Here is where we can add a whole bunch of text.
+I will use a bunch of the options to really help you see how well this
+works.
+
+## Wow
+
+### Smaller
+
+\*List +item 1 +item 2
+
+| Column 1 | Column 2       | Column 3 |
+| -------- | -------------- | -------- |
+| Obama    | President      | Dude     |
+| Bush     | President      | Bro      |
+| Biden    | Vice President | Guy      |
 
     ## # A tibble: 5 x 3
     ##   word          value type 
     ##   <chr>         <dbl> <chr>
-    ## 1 green washing    -3 Afinn
-    ## 2 benefitted        2 Afinn
-    ## 3 penalty          -2 Afinn
-    ## 4 treason          -3 Afinn
-    ## 5 poorer           -2 Afinn
+    ## 1 better            2 Afinn
+    ## 2 screwed          -2 Afinn
+    ## 3 manipulating     -1 Afinn
+    ## 4 compassionate     2 Afinn
+    ## 5 gray             -1 Afinn
 
     ## # A tibble: 5 x 3
-    ##   word        sentiment type 
-    ##   <chr>       <chr>     <chr>
-    ## 1 steal       sadness   NRC  
-    ## 2 marvelous   joy       NRC  
-    ## 3 yelp        fear      NRC  
-    ## 4 hygienic    positive  NRC  
-    ## 5 shoplifting negative  NRC
+    ##   word      sentiment type 
+    ##   <chr>     <chr>     <chr>
+    ## 1 integrity trust     NRC  
+    ## 2 clap      joy       NRC  
+    ## 3 bothering sadness   NRC  
+    ## 4 atone     trust     NRC  
+    ## 5 deluge    negative  NRC
 
     ## # A tibble: 5 x 3
-    ##   word          sentiment type 
-    ##   <chr>         <chr>     <chr>
-    ## 1 broken        negative  Bing 
-    ## 2 invulnerable  positive  Bing 
-    ## 3 lorn          negative  Bing 
-    ## 4 unreliability negative  Bing 
-    ## 5 bogus         negative  Bing
+    ##   word       sentiment type 
+    ##   <chr>      <chr>     <chr>
+    ## 1 felon      negative  Bing 
+    ## 2 lechery    negative  Bing 
+    ## 3 dishearten negative  Bing 
+    ## 4 disputed   negative  Bing 
+    ## 5 sever      negative  Bing
 
     ## # A tibble: 5 x 3
-    ##   word          sentiment    type    
-    ##   <chr>         <chr>        <chr>   
-    ## 1 seems         uncertainty  Loughran
-    ## 2 hazard        negative     Loughran
-    ## 3 hereunto      litigious    Loughran
-    ## 4 pretrial      negative     Loughran
-    ## 5 noncancelable constraining Loughran
+    ##   word       sentiment    type    
+    ##   <chr>      <chr>        <chr>   
+    ## 1 defraud    negative     Loughran
+    ## 2 dependent  constraining Loughran
+    ## 3 bottleneck negative     Loughran
+    ## 4 evade      negative     Loughran
+    ## 5 acquirees  litigious    Loughran
 
     ## # A tibble: 5 x 5
-    ##   word     president score occassion                 type  
-    ##   <chr>    <chr>     <dbl> <chr>                     <chr> 
-    ## 1 fastest  obama         2 SOTU_15                   pressy
-    ## 2 health   obama         2 State of the Union (2011) pressy
-    ## 3 honor    obama         3 Selma                     pressy
-    ## 4 al qaida obama        -5 Usama Bin Laden (2011)    pressy
-    ## 5 school   obama         2 SOTU_15                   pressy
+    ##   word      president score occassion                 type  
+    ##   <chr>     <chr>     <dbl> <chr>                     <chr> 
+    ## 1 projects  obama         2 State of the Union (2011) pressy
+    ## 2 standards obama         1 Climate Change (2013)     pressy
+    ## 3 help      obama         3 SOTU_15                   pressy
+    ## 4 country   obama         3 SOTU_15                   pressy
+    ## 5 protect   obama         3 Selma                     pressy
 
 ## Including Plots
 
-You can also embed plots, for example:
+Here is the big plot that loos super
+messy.
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->
+![](README_files/figure-gfm/pressure-1.png)<!-- -->![](README_files/figure-gfm/pressure-2.png)<!-- -->
 
 And it is clear that this is a graphic that says some
 stuff.
