@@ -1,8 +1,9 @@
 ---
-title: "Overview"
-author: "GameLab Team"
+title: "Can we "
+author: "Your names in alphabetical order with Dan"
 date: "5/29/2020"
-output: github_document
+output: 
+  tufte::tufte_html: default
 ---
 
 ```{r setup, include=FALSE}
@@ -109,7 +110,7 @@ comparative<-data.frame(balance=hulk$`mean(score).x`-hulk$`mean(score).y`, var=h
 
 # How do sentiment models work?
 
-Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours. Here is where we can add a whole bunch of text. I will use a bunch of the options to really help you see how well this works. 
+Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours. Here is where we can add a whole bunch of text. I will use a bunch of the options to really help you see how well this works. ^[Noop norp zorp]
 
 ## Wow
 
@@ -125,15 +126,23 @@ Obama    | President| Dude
 Bush     | President| Bro
 Biden    | Vice President | Guy
 
+##A variety of things
+
+```{r stuff and junk}
+knitr::kable(
+  pressy[1:4, 1:4], caption = 'A subset of our system.'
+)
+
+```
 
 
+```{r Sentiments, fig.margin=TRUE}
 
-
-```{r Sentiments}
 A1<-sample_n(A, 5)%>%
   mutate("type"="Afinn")
 
 A1
+
 B1<-sample_n(B, 5)%>%
   mutate("type"="NRC")
 B1
@@ -151,13 +160,22 @@ E1
 
 ```
 
+```{r i said crap a lot in an ecampus lecture}
+knitr::kable(
+  A1[1:3, 1:3], caption = 'A subset of our system.'
+)
 
+knitr::kable(
+  B1[1:2, 1:2], caption = 'A subset of our system.'
+)
+
+```
 
 ## Including Plots
 
 Here is the big plot that loos super messy.
 
-```{r pressure, echo=FALSE}
+```{r pressure, echo=FALSE, fig.margin=TRUE}
 ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
 
 ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_line()
@@ -168,6 +186,11 @@ And it is clear that this is a graphic that says some stuff.
 ```{r description of what is up}
 
 ggplot(comparative, aes(1:dim(comparative)[1], balance, colour=var))+geom_jitter()
+
+```
+
+```{marginfigure, echo = TRUE}
+Here is a random side note. As you may know, I love this stuff. 
 
 ```
 
