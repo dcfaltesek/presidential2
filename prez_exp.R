@@ -89,6 +89,16 @@ ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
 
 #this makes the result sheet
 hulk<-left_join(Afinn_final, prezz_final, by="reference")
-comparative<-data.frame(balance=hulk$`mean(score).x`-hulk$`mean(score).y`, (var=hulk$`sd(score).x`+hulk$`sd(score).y`)/2)
+comparative<-data.frame(reference=hulk$reference, balance=(hulk$`mean(score).x`+hulk$`mean(score).y`)/2), yar=(var=hulk$`sd(score).x`+hulk$`sd(score).y`)/2)
 View(comparative)
 View(hulk)
+
+comp3<-na.omit(comparative)
+
+ggplot(comp3, aes(reference, balance, colour=yar))+geom_jitter()
+View(comp3)
+dim(comp3)
+
+
+-1-1
+

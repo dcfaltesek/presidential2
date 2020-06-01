@@ -34,82 +34,74 @@ well this works. \[1\]
 
 A subset of our system.
 
-    ## # A tibble: 62 x 9
-    ##    reference `sum(value)` `sd(score).x` `mean(score).x` type.x `sum(score)`
-    ##        <int>        <dbl>         <dbl>           <dbl> <chr>         <dbl>
-    ##  1         1            5         2.22             1.25 Afinn            25
-    ##  2         2           10         0.516            1.67 Afinn            50
-    ##  3         3           -4         2.08            -1.33 Afinn            11
-    ##  4         7           -1        NA               -1    Afinn            14
-    ##  5         8            8         1.67             1.6  Afinn            74
-    ##  6         9           14         0.816            2.33 Afinn            25
-    ##  7        10            6         0.577            1.5  Afinn            NA
-    ##  8        11            0         2                0    Afinn            62
-    ##  9        12            5         2.83             1    Afinn            22
-    ## 10        13            6         0                2    Afinn            29
-    ## # … with 52 more rows, and 3 more variables: `sd(score).y` <dbl>,
-    ## #   `mean(score).y` <dbl>, type.y <chr>
-
-    ## # A tibble: 5 x 3
-    ##   word      value type 
-    ##   <chr>     <dbl> <chr>
-    ## 1 firing       -2 Afinn
-    ## 2 warns        -2 Afinn
-    ## 3 death        -2 Afinn
-    ## 4 sparkling     3 Afinn
-    ## 5 woeful       -3 Afinn
-
-    ## # A tibble: 5 x 3
-    ##   word       sentiment    type 
-    ##   <chr>      <chr>        <chr>
-    ## 1 orchestra  anger        NRC  
-    ## 2 celebrity  anticipation NRC  
-    ## 3 cautiously fear         NRC  
-    ## 4 deformed   disgust      NRC  
-    ## 5 immoral    disgust      NRC
-
-    ## # A tibble: 5 x 3
-    ##   word          sentiment type 
-    ##   <chr>         <chr>     <chr>
-    ## 1 insensitivity negative  Bing 
-    ## 2 convoluted    negative  Bing 
-    ## 3 tormented     negative  Bing 
-    ## 4 heartfelt     positive  Bing 
-    ## 5 brazenly      negative  Bing
-
-    ## # A tibble: 5 x 3
-    ##   word         sentiment   type    
-    ##   <chr>        <chr>       <chr>   
-    ## 1 embargoed    negative    Loughran
-    ## 2 suddenly     uncertainty Loughran
-    ## 3 incarcerate  litigious   Loughran
-    ## 4 regulatory   litigious   Loughran
-    ## 5 exacerbating negative    Loughran
-
-    ## # A tibble: 5 x 5
-    ##   word        president score occassion                        type  
-    ##   <chr>       <chr>     <dbl> <chr>                            <chr> 
-    ## 1 experiences obama         3 Trayvon Martin (2013)            pressy
-    ## 2 surviors    obama         3 Arizona Shooting Memorial (2011) pressy
-    ## 3 should      obama         1 SOTU_15                          pressy
-    ## 4 no          obama        -1 Selma                            pressy
-    ## 5 leaders     obama         3 Selma                            pressy
-
-| word   | value | type  |
-| :----- | ----: | :---- |
-| firing |   \-2 | Afinn |
-| warns  |   \-2 | Afinn |
-| death  |   \-2 | Afinn |
+| reference |     balance |       yar |
+| --------: | ----------: | --------: |
+|         1 |   1.5865385 | 1.7997380 |
+|         2 |   1.9202899 | 0.8152237 |
+|         3 | \-0.3229167 | 2.3664618 |
 
 A subset of our system.
 
-| word       | sentiment    |
-| :--------- | :----------- |
-| orchestra  | anger        |
-| celebrity  | anticipation |
-| cautiously | fear         |
-| deformed   | disgust      |
-| immoral    | disgust      |
+    ## # A tibble: 5 x 3
+    ##   word        value type 
+    ##   <chr>       <dbl> <chr>
+    ## 1 perpetrator    -2 Afinn
+    ## 2 convinces       1 Afinn
+    ## 3 agonise        -3 Afinn
+    ## 4 vulnerable     -2 Afinn
+    ## 5 swift           2 Afinn
+
+    ## # A tibble: 5 x 3
+    ##   word         sentiment type 
+    ##   <chr>        <chr>     <chr>
+    ## 1 ministry     trust     NRC  
+    ## 2 morbid       negative  NRC  
+    ## 3 presumptuous anger     NRC  
+    ## 4 wrinkled     sadness   NRC  
+    ## 5 synonymous   negative  NRC
+
+    ## # A tibble: 5 x 3
+    ##   word           sentiment type 
+    ##   <chr>          <chr>     <chr>
+    ## 1 traitorously   negative  Bing 
+    ## 2 blundering     negative  Bing 
+    ## 3 licentiousness negative  Bing 
+    ## 4 discoutinous   negative  Bing 
+    ## 5 raptureous     positive  Bing
+
+    ## # A tibble: 5 x 3
+    ##   word         sentiment    type    
+    ##   <chr>        <chr>        <chr>   
+    ## 1 annulment    negative     Loughran
+    ## 2 convicting   litigious    Loughran
+    ## 3 assuming     uncertainty  Loughran
+    ## 4 dictates     constraining Loughran
+    ## 5 notarization litigious    Loughran
+
+    ## # A tibble: 5 x 5
+    ##   word       president score occassion              type  
+    ##   <chr>      <chr>     <dbl> <chr>                  <chr> 
+    ## 1 our        obama         1 Selma                  pressy
+    ## 2 liberty    obama         2 Usama Bin Laden (2011) pressy
+    ## 3 prosperity obama         4 Usama Bin Laden (2011) pressy
+    ## 4 least      obama         1 Trayvon Martin (2013)  pressy
+    ## 5 making     obama         1 SOTU_15                pressy
+
+| word        | value | type  |
+| :---------- | ----: | :---- |
+| perpetrator |   \-2 | Afinn |
+| convinces   |     1 | Afinn |
+| agonise     |   \-3 | Afinn |
+
+A subset of our system.
+
+| word         | sentiment |
+| :----------- | :-------- |
+| ministry     | trust     |
+| morbid       | negative  |
+| presumptuous | anger     |
+| wrinkled     | sadness   |
+| synonymous   | negative  |
 
 A subset of our system.
 
@@ -118,7 +110,7 @@ A subset of our system.
 Here is the big plot that loos super
 messy.
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->![](README_files/figure-gfm/pressure-2.png)<!-- -->![](https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg)<!-- -->
+![](README_files/figure-gfm/pressure-1.png)<!-- -->![](https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg)<!-- -->
 
 And it is clear that this is a graphic that says some
 stuff.

@@ -103,15 +103,11 @@ ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
 
 #this makes the result sheet
 hulk<-left_join(Afinn_final, prezz_final, by="reference")
-comparative<-data.frame(reference=hulk$reference, balance=hulk$`mean(score).x`-hulk$`mean(score).y`, yar=(var=hulk$`sd(score).x`+hulk$`sd(score).y`)/2)
+comparative<-data.frame(reference=hulk$reference, balance=((hulk$`mean(score).x`+hulk$`mean(score).y`)/2), yar=(var=hulk$`sd(score).x`+hulk$`sd(score).y`)/2)
 View(comparative)
 View(hulk)
 
 comp3<-na.omit(comparative)
-
-ggplot(comp3, aes(reference, balance, colour=yar))+geom_jitter()
-View(comp3)
-dim(comp3)
 
 
 
@@ -141,7 +137,9 @@ knitr::kable(
   pressy[1:4, 1:4], caption = 'A subset of our system.'
 )
 
-hulk
+knitr::kable(
+  comparative[1:3, 1:3], caption = 'A subset of our system.'
+)
 ```
 
 
@@ -185,9 +183,10 @@ knitr::kable(
 Here is the big plot that loos super messy.
 
 ```{r pressure, echo=FALSE, fig.margin=TRUE}
-ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_jitter()
+ggplot(comp3, aes(reference, balance, colour=yar))+geom_jitter()
 
-ggplot(comp, aes(reference, 'mean(score)', color=type))+geom_line()
+
+
 
 knitr::include_graphics(
   'https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg',
