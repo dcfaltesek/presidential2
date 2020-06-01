@@ -2,8 +2,8 @@
 title: "Can we "
 author: "Your names in alphabetical order with Dan"
 date: "5/29/2020"
-output: 
-  tufte::tufte_html: default
+output: github_document
+  
 ---
 
 ```{r setup, include=FALSE}
