@@ -17,8 +17,6 @@ well this works. \[1\]
 
 ### Smaller
 
-\*List +item 1 +item 2
-
 | Column 1 | Column 2       | Column 3 |
 | -------- | -------------- | -------- |
 | Obama    | President      | Dude     |
@@ -36,66 +34,82 @@ well this works. \[1\]
 
 A subset of our system.
 
+    ## # A tibble: 62 x 9
+    ##    reference `sum(value)` `sd(score).x` `mean(score).x` type.x `sum(score)`
+    ##        <int>        <dbl>         <dbl>           <dbl> <chr>         <dbl>
+    ##  1         1            5         2.22             1.25 Afinn            25
+    ##  2         2           10         0.516            1.67 Afinn            50
+    ##  3         3           -4         2.08            -1.33 Afinn            11
+    ##  4         7           -1        NA               -1    Afinn            14
+    ##  5         8            8         1.67             1.6  Afinn            74
+    ##  6         9           14         0.816            2.33 Afinn            25
+    ##  7        10            6         0.577            1.5  Afinn            NA
+    ##  8        11            0         2                0    Afinn            62
+    ##  9        12            5         2.83             1    Afinn            22
+    ## 10        13            6         0                2    Afinn            29
+    ## # … with 52 more rows, and 3 more variables: `sd(score).y` <dbl>,
+    ## #   `mean(score).y` <dbl>, type.y <chr>
+
     ## # A tibble: 5 x 3
-    ##   word        value type 
-    ##   <chr>       <dbl> <chr>
-    ## 1 commitment      2 Afinn
-    ## 2 hiding         -1 Afinn
-    ## 3 restricting    -2 Afinn
-    ## 4 sarcastic      -2 Afinn
-    ## 5 imposes        -1 Afinn
+    ##   word      value type 
+    ##   <chr>     <dbl> <chr>
+    ## 1 firing       -2 Afinn
+    ## 2 warns        -2 Afinn
+    ## 3 death        -2 Afinn
+    ## 4 sparkling     3 Afinn
+    ## 5 woeful       -3 Afinn
 
     ## # A tibble: 5 x 3
     ##   word       sentiment    type 
     ##   <chr>      <chr>        <chr>
-    ## 1 complexity negative     NRC  
-    ## 2 offset     anticipation NRC  
-    ## 3 evict      sadness      NRC  
-    ## 4 parasite   fear         NRC  
-    ## 5 marry      surprise     NRC
+    ## 1 orchestra  anger        NRC  
+    ## 2 celebrity  anticipation NRC  
+    ## 3 cautiously fear         NRC  
+    ## 4 deformed   disgust      NRC  
+    ## 5 immoral    disgust      NRC
 
     ## # A tibble: 5 x 3
-    ##   word         sentiment type 
-    ##   <chr>        <chr>     <chr>
-    ## 1 magnificence positive  Bing 
-    ## 2 irritating   negative  Bing 
-    ## 3 bastards     negative  Bing 
-    ## 4 eccentricity negative  Bing 
-    ## 5 breakups     negative  Bing
+    ##   word          sentiment type 
+    ##   <chr>         <chr>     <chr>
+    ## 1 insensitivity negative  Bing 
+    ## 2 convoluted    negative  Bing 
+    ## 3 tormented     negative  Bing 
+    ## 4 heartfelt     positive  Bing 
+    ## 5 brazenly      negative  Bing
 
     ## # A tibble: 5 x 3
-    ##   word            sentiment   type    
-    ##   <chr>           <chr>       <chr>   
-    ## 1 anticipate      uncertainty Loughran
-    ## 2 monopolize      negative    Loughran
-    ## 3 probationers    litigious   Loughran
-    ## 4 distinctiveness positive    Loughran
-    ## 5 sued            negative    Loughran
+    ##   word         sentiment   type    
+    ##   <chr>        <chr>       <chr>   
+    ## 1 embargoed    negative    Loughran
+    ## 2 suddenly     uncertainty Loughran
+    ## 3 incarcerate  litigious   Loughran
+    ## 4 regulatory   litigious   Loughran
+    ## 5 exacerbating negative    Loughran
 
     ## # A tibble: 5 x 5
-    ##   word    president score occassion                 type  
-    ##   <chr>   <chr>     <dbl> <chr>                     <chr> 
-    ## 1 moral   obama         2 Selma                     pressy
-    ## 2 serve   obama         1 Usama Bin Laden (2011)    pressy
-    ## 3 economy obama         3 SOTU                      pressy
-    ## 4 will    obama         3 SOTU_15                   pressy
-    ## 5 forget  obama        -1 Immigration Reform (2013) pressy
+    ##   word        president score occassion                        type  
+    ##   <chr>       <chr>     <dbl> <chr>                            <chr> 
+    ## 1 experiences obama         3 Trayvon Martin (2013)            pressy
+    ## 2 surviors    obama         3 Arizona Shooting Memorial (2011) pressy
+    ## 3 should      obama         1 SOTU_15                          pressy
+    ## 4 no          obama        -1 Selma                            pressy
+    ## 5 leaders     obama         3 Selma                            pressy
 
-| word        | value | type  |
-| :---------- | ----: | :---- |
-| commitment  |     2 | Afinn |
-| hiding      |   \-1 | Afinn |
-| restricting |   \-2 | Afinn |
+| word   | value | type  |
+| :----- | ----: | :---- |
+| firing |   \-2 | Afinn |
+| warns  |   \-2 | Afinn |
+| death  |   \-2 | Afinn |
 
 A subset of our system.
 
 | word       | sentiment    |
 | :--------- | :----------- |
-| complexity | negative     |
-| offset     | anticipation |
-| evict      | sadness      |
-| parasite   | fear         |
-| marry      | surprise     |
+| orchestra  | anger        |
+| celebrity  | anticipation |
+| cautiously | fear         |
+| deformed   | disgust      |
+| immoral    | disgust      |
 
 A subset of our system.
 

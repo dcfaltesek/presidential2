@@ -2,8 +2,7 @@
 title: "Can we "
 author: "Your names in alphabetical order with Dan"
 date: "5/29/2020"
-output: 
-  tufte::tufte_html: default
+output: github_document
   
 ---
 
@@ -119,10 +118,6 @@ Lexicons thats how, here are 5 randomly sampled words from four popular lexicons
 ## Wow
 
 ### Smaller
-
-*List
-  +item 1
-  +item 2
   
 Column 1 | Column 2 | Column 3
 ---------| -------- | --------
@@ -137,6 +132,7 @@ knitr::kable(
   pressy[1:4, 1:4], caption = 'A subset of our system.'
 )
 
+hulk
 ```
 
 
@@ -199,10 +195,15 @@ And it is clear that this is a graphic that says some stuff.
 
 ggplot(comparative, aes(1:dim(comparative)[1], balance, colour=var))+geom_jitter()
 
+
+
 ```
 
 ```{marginfigure, echo = TRUE}
 Here is a random side note. As you may know, I love this stuff. 
+
+
+
 
 ```
 
