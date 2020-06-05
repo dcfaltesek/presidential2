@@ -1,6 +1,6 @@
 ---
 title: "Presidential Rhetoric and Sentiment Analysis: the Case of Barack Obama OR Talking Like a President"
-author: "Haley Daarstead, Quinn Downey, Angel Le, Mariah Samano, Simon Hutton, with Dan Faltesek"
+author: "Haley Daarstead, Quinn Downey, Angel Le, Mariah Samano, Simon Hutton, with Dan Faltesek. Affiliation: Oregon State University, New Media Communications"
 date: "6/5/2020"
 output: github_document
   
@@ -232,7 +232,7 @@ In conclusion, the ability to create a uniform sentiment analysis for all presid
 
 Included here are the dataframe that includes a paragraph by paragraph run down of the sentiment results for both models. Following that is our reference run of Obama's Farwell Address. 
 
-```{r additional materials, echo=FALSE}
+```{r additional materials, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::kable(
  hulk[1:66, 1:9], caption = 'The Speech With Paragraphs'
 )

@@ -2,7 +2,8 @@ Presidential Rhetoric and Sentiment Analysis: the Case of Barack Obama
 OR Talking Like a President
 ================
 Haley Daarstead, Quinn Downey, Angel Le, Mariah Samano, Simon Hutton,
-with Dan Faltesek
+with Dan Faltesek. Affiliation: Oregon State University, New Media
+Communications
 6/5/2020
 
 # Why sentiment analysis?
@@ -52,43 +53,43 @@ wonderful book and library \[2\] Julia Slige and David Robinsion.
 It became clear in our early work, that a universial Presidential
 sentiment model was completely unworkable.
 
-| word       | value | type  |
-| :--------- | ----: | :---- |
-| weary      |   \-2 | Afinn |
-| importance |     2 | Afinn |
-| loathed    |   \-3 | Afinn |
-| crazy      |   \-2 | Afinn |
-| damages    |   \-3 | Afinn |
+| word           | value | type  |
+| :------------- | ----: | :---- |
+| hacked         |   \-1 | Afinn |
+| glee           |     3 | Afinn |
+| distorts       |   \-2 | Afinn |
+| misinterpreted |   \-2 | Afinn |
+| derision       |   \-2 | Afinn |
 
 AFINN
 
-| word      | sentiment |
-| :-------- | :-------- |
-| cutting   | disgust   |
-| lamb      | positive  |
-| revel     | joy       |
-| unsettled | disgust   |
-| bore      | negative  |
+| word     | sentiment |
+| :------- | :-------- |
+| bookish  | positive  |
+| bottom   | negative  |
+| cheerful | joy       |
+| offing   | negative  |
+| frighten | fear      |
 
 NRC
 
-| word             | sentiment |
-| :--------------- | :-------- |
-| succeed          | positive  |
-| well-established | positive  |
-| flat-out         | negative  |
-| gauche           | negative  |
-| continuity       | positive  |
+| word          | sentiment |
+| :------------ | :-------- |
+| incompetently | negative  |
+| flimsy        | negative  |
+| needlessly    | negative  |
+| supreme       | positive  |
+| unforgettable | positive  |
 
 BING
 
-| word        | sentiment |
-| :---------- | :-------- |
-| abdicating  | negative  |
-| overstate   | negative  |
-| perjury     | negative  |
-| interferes  | negative  |
-| beautifully | positive  |
+| word          | sentiment |
+| :------------ | :-------- |
+| felonies      | litigious |
+| invalidation  | negative  |
+| contradicting | negative  |
+| downsizings   | negative  |
+| thereover     | litigious |
 
 LOUGHRAN
 
@@ -230,12 +231,7 @@ for one specific president in order to get the most accurate results.
 Included here are the dataframe that includes a paragraph by paragraph
 run down of the sentiment results for both models. Following that is our
 reference run of Obama’s Farwell
-    Address.
-
-    ## Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
-    ## Use `NA` as row index to obtain a row full of `NA` values.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+Address.
 
 | reference | sum(value) | sd(score).x | mean(score).x | type.x | sum(score) | sd(score).y | mean(score).y | type.y |
 | --------: | ---------: | ----------: | ------------: | :----- | ---------: | ----------: | ------------: | :----- |
