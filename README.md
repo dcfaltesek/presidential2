@@ -1,29 +1,96 @@
-Can we
+Presidential Rhetoric and Sentiment Analysis: the Case of Barack Obama
+OR Talking Like a President
 ================
-Your names in alphabetical order with Dan
-5/29/2020
+Haley Daarstead, Quinn Downey, Angel Le, Mariah Samano, Simon Hutton,
+with Dan Faltesek
+6/5/2020
 
-# How do sentiment models work?
+# Why sentiment analysis?
 
-Lexicons thats how, here are 5 randomly sampled words from four popular
-lexicons and then ours. Here is where we can add a whole bunch of text.
-I will :brain: use a bunch of the options to really help you see how
-well this works. \[1\]
+The sentiment of a presidential speech is usually obvious when listening
+to the speech. But what if you wanted to look at the sentiment of a
+whole bunch of speeches at once? Listening to the speeches or reading
+through all the transcripts would take a very long time. We wanted to
+see if there was a way we could make a computer do this for us so we
+would have more time to look at the data. A computer can also look at
+words individually for importance and amount of usage, which would be
+very hard if not impossible to do by yourself. Developing a good
+sentiment lexicon would allow us to be able to see how different
+presidents use words differently within different contexts or even
+within the same context. Comparing the word usage of various presidents
+could be an interesting research project.
 
-  - amazing
-      - boop
+There are already several sentiment lexicons available. Usually when
+analyzing speeches, people use a bunch of these lexicons and put all
+their analyses together. Since the different lexicons have different
+ways of rating words (for example, a numbered rating system versus
+rating the sentiment of a word as either positive or negative), this
+could get messy, so we wanted to see if we could develop a single
+lexicon that could be the best to be used for speeches so there would
+not be so much back and forth between the different lexicons. We chose
+to rate the words in our lexicon on a -5 to 5 scale. This would give
+words both a sentiment rating of positive or negative and a rating of
+how much of that word exhibits a positive or negative sentiment.
 
-## Wow
+Our group created a basic sentiment lexicon for Obama speeches. This was
+completed through the collection of speeches from the years 2008 to
+2015. Running a tfidf with the selected speeches, words were selected
+and then scored between -5 and 5 for their impact of positive and
+negative sentiment within the speech. In cases where we scored a word
+multiple times, the mean score was used in the final lexicon.
 
-### Smaller
+Obama’s Farewell address in 2017 was selected to compare the success of
+afinn and our sentiment lexicon. \[1\] The result showed high variance
+between the two lexicons. Overall, our analysis of the speech was
+significantly more positive than afinn.
 
-| Column 1 | Column 2       | Column 3 |
-| -------- | -------------- | -------- |
-| Obama    | President      | Dude     |
-| Bush     | President      | Bro      |
-| Biden    | Vice President | Guy      |
+To help you understand how these lexicons funciton, here are some
+samples from each model works with langauge. These models are those that
+are used with the code that provided foundations for this project, the
+wonderful book and library \[2\] Julia Slige and David Robinsion.
 
-\#\#A variety of things
+It became clear in our early work, that a universial Presidential
+sentiment model was completely unworkable.
+
+| word       | value | type  |
+| :--------- | ----: | :---- |
+| weary      |   \-2 | Afinn |
+| importance |     2 | Afinn |
+| loathed    |   \-3 | Afinn |
+| crazy      |   \-2 | Afinn |
+| damages    |   \-3 | Afinn |
+
+AFINN
+
+| word      | sentiment |
+| :-------- | :-------- |
+| cutting   | disgust   |
+| lamb      | positive  |
+| revel     | joy       |
+| unsettled | disgust   |
+| bore      | negative  |
+
+NRC
+
+| word             | sentiment |
+| :--------------- | :-------- |
+| succeed          | positive  |
+| well-established | positive  |
+| flat-out         | negative  |
+| gauche           | negative  |
+| continuity       | positive  |
+
+BING
+
+| word        | sentiment |
+| :---------- | :-------- |
+| abdicating  | negative  |
+| overstate   | negative  |
+| perjury     | negative  |
+| interferes  | negative  |
+| beautifully | positive  |
+
+LOUGHRAN
 
 | word      | president | score | occassion |
 | :-------- | :-------- | ----: | :-------- |
@@ -32,99 +99,290 @@ well this works. \[1\]
 | health    | obama     |     2 | SOTU      |
 | education | obama     |     2 | SOTU      |
 
-A subset of our system.
+PRESSY
 
-| reference |     balance |       yar |
-| --------: | ----------: | --------: |
-|         1 |   1.5865385 | 1.7997380 |
-|         2 |   1.9202899 | 0.8152237 |
-|         3 | \-0.3229167 | 2.3664618 |
+As you can see each lexicon has very different ways of dealing with
+meaning. Many student projects use AFINN because of the gradient created
+in the values. The other models come accross as overly simplstic.
 
-A subset of our system.
-
-    ## # A tibble: 5 x 3
-    ##   word        value type 
-    ##   <chr>       <dbl> <chr>
-    ## 1 perpetrator    -2 Afinn
-    ## 2 convinces       1 Afinn
-    ## 3 agonise        -3 Afinn
-    ## 4 vulnerable     -2 Afinn
-    ## 5 swift           2 Afinn
-
-    ## # A tibble: 5 x 3
-    ##   word         sentiment type 
-    ##   <chr>        <chr>     <chr>
-    ## 1 ministry     trust     NRC  
-    ## 2 morbid       negative  NRC  
-    ## 3 presumptuous anger     NRC  
-    ## 4 wrinkled     sadness   NRC  
-    ## 5 synonymous   negative  NRC
-
-    ## # A tibble: 5 x 3
-    ##   word           sentiment type 
-    ##   <chr>          <chr>     <chr>
-    ## 1 traitorously   negative  Bing 
-    ## 2 blundering     negative  Bing 
-    ## 3 licentiousness negative  Bing 
-    ## 4 discoutinous   negative  Bing 
-    ## 5 raptureous     positive  Bing
-
-    ## # A tibble: 5 x 3
-    ##   word         sentiment    type    
-    ##   <chr>        <chr>        <chr>   
-    ## 1 annulment    negative     Loughran
-    ## 2 convicting   litigious    Loughran
-    ## 3 assuming     uncertainty  Loughran
-    ## 4 dictates     constraining Loughran
-    ## 5 notarization litigious    Loughran
-
-    ## # A tibble: 5 x 5
-    ##   word       president score occassion              type  
-    ##   <chr>      <chr>     <dbl> <chr>                  <chr> 
-    ## 1 our        obama         1 Selma                  pressy
-    ## 2 liberty    obama         2 Usama Bin Laden (2011) pressy
-    ## 3 prosperity obama         4 Usama Bin Laden (2011) pressy
-    ## 4 least      obama         1 Trayvon Martin (2013)  pressy
-    ## 5 making     obama         1 SOTU_15                pressy
-
-| word        | value | type  |
-| :---------- | ----: | :---- |
-| perpetrator |   \-2 | Afinn |
-| convinces   |     1 | Afinn |
-| agonise     |   \-3 | Afinn |
-
-A subset of our system.
-
-| word         | sentiment |
-| :----------- | :-------- |
-| ministry     | trust     |
-| morbid       | negative  |
-| presumptuous | anger     |
-| wrinkled     | sadness   |
-| synonymous   | negative  |
-
-A subset of our system.
-
-## Including Plots
+## Visualizing the Speech
 
 Here is the big plot that loos super
 messy.
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->![](https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg)<!-- -->
+![](README_files/figure-gfm/pressure-1.png)<!-- -->![](README_files/figure-gfm/pressure-2.png)<!-- -->
 
-And it is clear that this is a graphic that says some
-stuff.
+As you can see the speech….
 
-    ## Warning: Removed 5 rows containing missing values (geom_point).
+In a comparative paragraph analysis of afinn and ours, we found that the
+biggest differences in the Farewell speech.
 
-![](README_files/figure-gfm/description%20of%20what%20is%20up-1.png)<!-- -->
+*in reference to mean variance graphic* Mean variance between afinn and
+our model was consistently high, with the lowest mean variance still
+being above 0.5. The variance suggests that there was some general
+agreement, but a great deal of varience between our models. There are
+some points, in the early 20s, where AFINN sees negative paragrpahs were
+we see substantially more positive.
 
-``` marginfigure
-Here is a random side note. As you may know, I love this stuff. 
-```
+*graph of mean score of our and afinn’s sentiment score by paragraph*
+This graphic demonstrates the mean score of our and afinn’s sentiment
+score by paragraph. It is clearly visible that the combined sentiment
+score by paragraph of our and afinn’s models trends heavily towards the
+positive. The color indicates the internal variance of the paragraph,
+meaning that less variance corresponds to more similar sentiment scores
+of individual words in the paragraph. A light color indicates higher
+variance within the paragraph and a darker color indicates less variance
+in the paragraph. It can be seen in the graphic that paragraphs with
+more internal variance tended to have a lower sentiment overall than
+paragraphs with less internal variance. This is particularly noticeable
+for paragraphs in the 38-46 paragraph range. That range of paragraphs
+from 38-46 corresponds to the primarily foreign policy section of the
+speech which contained visceral descriptions of the military, foreign
+opposition, and heroism. It makes sense then that paragraphs 38-46 would
+likely contain a large variance in positive to negative sentiment, and
+be generally less positive due to descriptions of foreign opponents such
+as ISIL.  
+It is also important to think about intra-paragraph differences. Althogh
+we used the paragraph level, the sentence level may be more appropraite
+for analysis.
 
-Values of under zero indicate that our analysis was substantially more
-positive than Afinn
+Context matters greatly in presidential speeches. It is difficult for a
+single sentiment lexicon to capture sentiment between speeches at
+different events of the same president, much less between different
+presidents. The context of one word in speech after a mass shooting
+would be different than the context of the same word in the State of
+Union Speech.
+
+# Discussion
+
+Changes in topics showed a change in rhetoric, specifically around
+paragraph 40, there was a large dip in the variance between the two
+lexicons. Illustrating this transition in Obama’s speech of rhetoric to
+foeriegn relations. This transition highlighted key differences between
+our sentiment lexicons and afinn. Our analysis that developed our
+sentiment lexicon looked at how Obama talked about foreign relations in
+different contexts. This rhetoric around foreign relations is important
+to note because it showed that a generic sentiment lexicon like afinn
+struggled to analyze it correctly. There was a stark difference in how
+these two scored the paragraphs, with ours scoring was more positive and
+their scoring was more negative. This is due to the words that would
+usually be more negative being more positive in the context of foriegn
+relations. Thus, it’s key to recognize the context and rhetorical
+characteristics about presidential topics when building a sentiment
+lexicon.
+
+In order to create an accurate sentiment lexicon for a presidential
+speech, who is speaking must be taken into account. Understanding
+Obama’s characteristics as a speaker was important in understanding
+the analysis of the words. While deciding how to score the words, each
+of us took the time to understand the context in which Obama was using
+the word. The way Obama speaks and word choice is different from many
+other presidential speeches. His word choice would be different from
+that of Bush or Trump. Also, the way he uses these words or sayings to
+make points is unlike that of past and current presidents. The
+characteristics of his speaking is important to understand when giving
+the score on the lexicon. While speaking his pauses, or the certain
+phrases are spoken in a way that deliver a more positive or negative
+message than just the word itself. This is essential when scoring the
+word, because it is the difference between a 2 or 4, or -1 or -3.
+
+There is no good way to judge the sentiment of words without the context
+of each speech nor taking into account how each president uses the same
+words in unique ways. This creates an even bigger challenge for creating
+one single sentiment lexicon for all presidents. Without a deeper
+understanding of the president, his background, and his speaking
+abilities, it is difficult to use generic l sentiment lexicons like
+AFINN. Generic sentiment lexicons do not have these aspects that
+understand these rhetorical characteristics that presidents utilize in
+their speeches. But, it is also difficult to develop a lexicon that
+would fit every president, because presidents have unsimilar vocabulary
+and speech characterics are different. If the lexicon our group
+developed was applied to Bush or Trump the results would not be accurate
+because these presidents have different word choices and speaking
+characteristics than Obama.
+
+In conclusion, the ability to create a uniform sentiment analysis for
+all presidents and speeches would be nearly impossible. If any
+presidential sentiment lexicon was developed it would have to be created
+for one specific president in order to get the most accurate results.
+
+# Key Points
+
+1.  Generic Sentiment models are of limited use.
+2.  Sentiment lexicons need to be field specific and validated by
+    experts with qualitative expetise. External validation with panels
+    would also be good.
+3.  Getting the correct level for sentiment is extremely difficult. We
+    used paragraphs, it is unclear if this is the correct atomic unit
+    for meaning, or if we should operate on the sentence level, or if
+    some kind of musicological model with phrasing would be preferable.
+    Tweets may be the ideal unit for sentiment, anything larger is
+    questionable, the clarity of purpose of a Tweet is also well-suited
+    for this sort of analysis.
+4.  It became clear that the complexity of the voicing across a speech
+    is not meaningfully modeled by this sentiment process or any we have
+    yet encountered.
+5.  Detecting when to apply multiple lexicons would be a key future
+    approach.
+
+# Additional Materials.
+
+Included here are the dataframe that includes a paragraph by paragraph
+run down of the sentiment results for both models. Following that is our
+reference run of Obama’s Farwell
+    Address.
+
+    ## Warning: The `i` argument of ``[.tbl_df`()` must lie in [0, rows] if positive, as of tibble 3.0.0.
+    ## Use `NA` as row index to obtain a row full of `NA` values.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+
+| reference | sum(value) | sd(score).x | mean(score).x | type.x | sum(score) | sd(score).y | mean(score).y | type.y |
+| --------: | ---------: | ----------: | ------------: | :----- | ---------: | ----------: | ------------: | :----- |
+|         1 |          5 |   2.2173558 |     1.2500000 | Afinn  |         25 |   1.3821203 |     1.9230769 | Pressy |
+|         2 |         10 |   0.5163978 |     1.6666667 | Afinn  |         50 |   1.1140497 |     2.1739130 | Pressy |
+|         3 |        \-4 |   2.0816660 |   \-1.3333333 | Afinn  |         11 |   2.6512576 |     0.6875000 | Pressy |
+|         7 |        \-1 |          NA |   \-1.0000000 | Afinn  |         14 |   1.4298407 |     1.4000000 | Pressy |
+|         8 |          8 |   1.6733201 |     1.6000000 | Afinn  |         74 |   1.3744260 |     1.9473684 | Pressy |
+|         9 |         14 |   0.8164966 |     2.3333333 | Afinn  |         25 |   1.3483997 |     2.2727273 | Pressy |
+|        10 |          6 |   0.5773503 |     1.5000000 | Afinn  |         NA |          NA |            NA | Pressy |
+|        11 |          0 |   2.0000000 |     0.0000000 | Afinn  |         62 |   1.5521583 |     2.0666667 | Pressy |
+|        12 |          5 |   2.8284271 |     1.0000000 | Afinn  |         22 |   2.3419256 |     0.5500000 | Pressy |
+|        13 |          6 |   0.0000000 |     2.0000000 | Afinn  |         29 |   1.3280573 |     2.0714286 | Pressy |
+|        15 |        \-1 |          NA |   \-1.0000000 | Afinn  |          0 |   1.4142136 |     0.0000000 | Pressy |
+|        16 |          5 |   1.2247449 |     1.0000000 | Afinn  |         17 |   1.6599431 |     0.7727273 | Pressy |
+|        17 |          5 |   1.9955307 |     0.6250000 | Afinn  |         36 |   1.5361603 |     1.2857143 | Pressy |
+|        18 |          3 |   0.7071068 |     1.5000000 | Afinn  |         17 |   1.2247449 |     1.0000000 | Pressy |
+|        19 |          7 |   1.7224014 |     1.1666667 | Afinn  |         61 |   2.0018930 |     1.8484848 | Pressy |
+|        20 |         11 |   1.6124515 |     1.0000000 | Afinn  |         65 |   1.4387662 |     1.4130435 | Pressy |
+|        21 |          2 |          NA |     2.0000000 | Afinn  |          9 |   1.7786614 |     0.8181818 | Pressy |
+|        22 |         11 |   1.5730095 |     0.8461538 | Afinn  |         34 |   1.6894835 |     0.9189189 | Pressy |
+|        23 |          3 |   1.8126539 |     0.4285714 | Afinn  |         33 |   1.5048940 |     1.8333333 | Pressy |
+|        24 |          5 |   1.2247449 |     1.0000000 | Afinn  |         41 |   2.2027485 |     1.1714286 | Pressy |
+|        25 |          3 |   2.4083189 |     0.6000000 | Afinn  |         27 |   1.5312534 |     1.3500000 | Pressy |
+|        26 |          1 |   1.6431677 |     0.2000000 | Afinn  |         45 |   1.8523052 |     1.5000000 | Pressy |
+|        27 |          2 |   1.8618987 |     0.3333333 | Afinn  |         NA |          NA |            NA | Pressy |
+|        28 |          0 |   2.9439203 |     0.0000000 | Afinn  |         63 |   1.8083889 |     1.7027027 | Pressy |
+|        29 |          1 |   2.0412415 |     0.1666667 | Afinn  |         38 |   1.6129009 |     1.5833333 | Pressy |
+|        30 |        \-6 |   2.0976177 |   \-1.0000000 | Afinn  |         10 |   1.9086270 |     1.2500000 | Pressy |
+|        31 |        \-1 |   3.5355339 |   \-0.5000000 | Afinn  |         NA |          NA |            NA | Pressy |
+|        32 |          9 |   1.3784049 |     1.5000000 | Afinn  |         39 |   1.4084373 |     1.6250000 | Pressy |
+|        33 |         11 |   1.2866839 |     1.1000000 | Afinn  |         27 |   1.1128619 |     1.0384615 | Pressy |
+|        34 |          4 |   1.6035675 |     0.5000000 | Afinn  |         21 |   1.5811388 |     1.1666667 | Pressy |
+|        35 |        \-5 |   1.6348478 |   \-0.4545455 | Afinn  |         54 |   1.5015144 |     1.2000000 | Pressy |
+|        36 |          0 |   2.0701967 |     0.0000000 | Afinn  |         31 |   1.4680815 |     1.5500000 | Pressy |
+|        37 |          1 |          NA |     1.0000000 | Afinn  |          3 |   2.0000000 |     1.0000000 | Pressy |
+|        38 |          5 |   1.8708287 |     1.0000000 | Afinn  |          4 |   2.8691260 |     0.1666667 | Pressy |
+|        39 |       \-10 |   1.6422453 |   \-0.8333333 | Afinn  |         20 |   1.8708287 |     0.8000000 | Pressy |
+|        40 |          3 |   2.1213203 |     0.3333333 | Afinn  |         17 |   3.0244171 |     0.4358974 | Pressy |
+|        41 |          0 |   2.8284271 |     0.0000000 | Afinn  |          8 |   1.9540168 |     0.7272727 | Pressy |
+|        42 |        \-1 |   2.8867513 |   \-0.3333333 | Afinn  |         31 |   2.1564699 |     1.2916667 | Pressy |
+|        43 |        \-2 |   2.1602469 |   \-0.3333333 | Afinn  |         25 |   2.1765383 |     1.0416667 | Pressy |
+|        44 |        \-5 |   1.5811388 |   \-0.5000000 | Afinn  |         16 |   2.6234664 |     0.4848485 | Pressy |
+|        45 |        \-3 |   2.4397502 |   \-0.4285714 | Afinn  |         23 |   2.0065278 |     0.8846154 | Pressy |
+|        46 |          2 |   1.5055453 |     0.3333333 | Afinn  |         32 |   1.7204651 |     1.2800000 | Pressy |
+|        47 |          1 |          NA |     1.0000000 | Afinn  |          3 |   1.6583124 |     0.3333333 | Pressy |
+|        48 |         10 |   1.3662601 |     1.6666667 | Afinn  |         43 |   1.8950646 |     1.5357143 | Pressy |
+|        49 |        \-4 |   1.4142136 |   \-1.0000000 | Afinn  |         36 |   0.9451352 |     1.5652174 | Pressy |
+|        50 |          2 |   2.5166115 |     0.6666667 | Afinn  |         42 |   1.7440963 |     1.4482759 | Pressy |
+|        51 |         10 |   1.9002924 |     1.1111111 | Afinn  |         26 |   1.2041595 |     1.6250000 | Pressy |
+|        52 |        \-4 |   1.4142136 |   \-1.0000000 | Afinn  |         29 |   1.6271506 |     1.3809524 | Pressy |
+|        53 |          8 |   2.3401262 |     1.1428571 | Afinn  |         NA |          NA |            NA | Pressy |
+|        54 |          3 |   2.0658793 |     0.3750000 | Afinn  |         36 |   1.2972119 |     1.2000000 | Pressy |
+|        55 |          5 |   0.5773503 |     1.6666667 | Afinn  |         37 |   1.8855884 |     1.1562500 | Pressy |
+|        56 |         11 |   0.8366600 |     2.2000000 | Afinn  |         36 |   1.2864567 |     1.8947368 | Pressy |
+|        57 |         12 |   1.8898224 |     1.7142857 | Afinn  |         32 |   1.3913653 |     2.4615385 | Pressy |
+|        58 |         17 |   0.5345225 |     2.4285714 | Afinn  |         33 |   1.5675276 |     1.5714286 | Pressy |
+|        59 |          7 |   2.5625508 |     1.1666667 | Afinn  |         42 |   1.4780829 |     1.4482759 | Pressy |
+|        60 |         12 |   1.3801311 |     1.7142857 | Afinn  |         48 |   1.4669856 |     2.5263158 | Pressy |
+|        61 |          3 |   1.7320508 |     1.0000000 | Afinn  |         39 |   1.3681355 |     1.4444444 | Pressy |
+|        62 |          5 |   1.9407902 |     0.8333333 | Afinn  |         49 |   1.7105338 |     1.8148148 | Pressy |
+|        63 |          5 |   1.5000000 |     1.2500000 | Afinn  |         66 |   1.3462912 |     2.0000000 | Pressy |
+|        64 |          5 |   0.5000000 |     1.2500000 | Afinn  |         NA |          NA |            NA | Pressy |
+|        65 |          1 |          NA |     1.0000000 | Afinn  |          4 |   0.5773503 |     1.3333333 | Pressy |
+|        66 |          6 |   0.5773503 |     1.5000000 | Afinn  |         24 |   1.2247449 |     2.6666667 | Pressy |
+|        NA |         NA |          NA |            NA | NA     |         NA |          NA |            NA | NA     |
+|        NA |         NA |          NA |            NA | NA     |         NA |          NA |            NA | NA     |
+|        NA |         NA |          NA |            NA | NA     |         NA |          NA |            NA | NA     |
+|        NA |         NA |          NA |            NA | NA     |         NA |          NA |            NA | NA     |
+
+The Speech With
+Paragraphs
+
+| paragraph                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | reference |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------: |
+| The President. Hello, Chicago\! It’s good to be home\! Thank you. Thank you, everybody. Thank you. Thank you so much. Thank you. It’s good to be home. Thanks. All right, everybody sit down. We’re on live TV here. I’ve got to—I’ve got to move. You can tell that I’m a lame duck because nobody’s following instructions. \[Laughter\] Everybody have a seat.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |         1 |
+| My fellow Americans, Michelle and I have been so touched by all the well wishes that we’ve received over the past few weeks. But tonight, tonight it’s my turn to say thanks. Whether we have seen eye to eye or rarely agreed at all, my conversations with you, the American people, in living rooms and in schools, at farms, on factory floors, at diners and on distant military outposts—those conversations are what have kept me honest and kept me inspired and kept me going. And every day, I have learned from you. You made me a better President, and you made me a better man.                                                                                                                                                                                                                                                                                                                                                                            |         2 |
+| So I first came to Chicago when I was in my early twenties. And I was still trying to figure out who I was, still searching for a purpose in my life. And it was a neighborhood not far from here where I began working with church groups in the shadows of closed steel mills. It was on these streets where I witnessed the power of faith and the quiet dignity of working people in the face of struggle and loss.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         3 |
+| Audience members. Four more years\! Four more years\! Four more years\!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         4 |
+| The President. I can’t do that.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |         5 |
+| Audience members. Four more years\! Four more years\! Four more years\!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |         6 |
+| The President. Now, this is where I learned that change only happens when ordinary people get involved and they get engaged and they come together to demand it.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         7 |
+| After 8 years as your President, I still believe that. And it’s not just my belief. It’s the beating heart of our American idea, our bold experiment in self-government. It’s the conviction that we are all created equal, endowed by our Creator with certain unalienable rights, among them life, liberty, and the pursuit of happiness. It’s the insistence that these rights, while self-evident, have never been self-executing; that we, the people, through the instrument of our democracy, can form a more perfect Union.                                                                                                                                                                                                                                                                                                                                                                                                                                      |         8 |
+| What a radical idea, a great gift that our Founders gave to us: The freedom to chase our individual dreams through our sweat and toil and imagination, and the imperative to strive together, as well, to achieve a common good, a greater good.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |         9 |
+| For 240 years, our Nation’s call to citizenship has given work and purpose to each new generation. It’s what led patriots to choose republic over tyranny, pioneers to trek west, slaves to brave that makeshift railroad to freedom. It’s what pulled immigrants and refugees across oceans and the Rio Grande. It’s what pushed women to reach for the ballot. It’s what powered workers to organize. It’s why GIs gave their lives at Omaha Beach and Iwo Jima, Iraq and Afghanistan, and why men and women from Selma to Stonewall were prepared to give theirs as well.                                                                                                                                                                                                                                                                                                                                                                                             |        10 |
+| So that’s what we mean when we say America’s exceptional: not that our Nation has been flawless from the start, but that we have shown the capacity to change and make life better for those who follow. Yes, our progress has been uneven. The work of democracy has always been hard. It’s always been contentious. Sometimes it’s been bloody. For every two steps forward, it often feels we take one step back. But the long sweep of America has been defined by forward motion, a constant widening of our founding creed to embrace all and not just some.                                                                                                                                                                                                                                                                                                                                                                                                       |        11 |
+| If I had told you 8 years ago that America would reverse a great recession, reboot our auto industry, and unleash the longest stretch of job creation in our history; if I had told you that we would open up a new chapter with the Cuban people, shut down Iran’s nuclear weapons program without firing a shot, take out the mastermind of 9/11; if I had told you that we would win marriage equality and secure the right to health insurance for another 20 million of our fellow citizens—if I had told you all that, you might have said our sights were set a little too high. But that’s what we did. That’s what you did.                                                                                                                                                                                                                                                                                                                                     |        12 |
+| You were the change. You answered people’s hopes, and because of you, by almost every measure, America is a better, stronger place than it was when we started.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |        13 |
+| In 10 days, the world will witness a hallmark of our democracy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |        14 |
+| Audience members. No\!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |        15 |
+| The President. No, no, no, no, no, the peaceful transfer of power from one freely elected President to the next. I committed to President-elect Trump that my administration would ensure the smoothest possible transition, just as President Bush did for me. Because it’s up to all of us to make sure our Government can help us meet the many challenges we still face.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |        16 |
+| We have what we need to do so. We have everything we need to meet those challenges. After all, we remain the wealthiest, most powerful, and most respected nation on Earth. Our youth, our drive, our diversity and openness, our boundless capacity for risk and reinvention means that the future should be ours. But that potential will only be realized if our democracy works. Only if our politics better reflects the decency of our people. Only if all of us, regardless of party affiliation or particular interests, help restore the sense of common purpose that we so badly need right now.                                                                                                                                                                                                                                                                                                                                                               |        17 |
+| That’s what I want to focus on tonight: the state of our democracy. Understand, democracy does not require uniformity. Our Founders argued. They quarreled. Eventually, they compromised. They expected us to do the same. But they knew that democracy does require a basic sense of solidarity: the idea that for all our outward differences, we’re all in this together; that we rise or fall as one.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |        18 |
+| There have been moments throughout our history that threatened that solidarity. The beginning of this century has been one of those times. A shrinking world, growing inequality; demographic change, and the specter of terrorism—these forces haven’t just tested our security and our prosperity, but are testing our democracy as well. And how we meet these challenges to our democracy will determine our ability to educate our kids and create good jobs and protect our homeland. In other words, it will determine our future.                                                                                                                                                                                                                                                                                                                                                                                                                                |        19 |
+| To begin with, our democracy won’t work without a sense that everyone has economic opportunity. And the good news is that today the economy is growing again. Wages, incomes, home values, and retirement accounts are all rising again. Poverty is falling again. The wealthy are paying a fairer share of taxes even as the stock market shatters records. The unemployment rate is near a 10-year low. The uninsured rate has never, ever been lower. Health care costs are rising at the slowest rate in 50 years. And I’ve said and I mean it: If anyone can put together a plan that is demonstrably better than the improvements we’ve made to our health care system that covers as many people at less cost, I will publicly support it.                                                                                                                                                                                                                        |        20 |
+| Because that, after all, is why we serve. Not to score points or take credit, but to make people’s lives better.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |        21 |
+| But for all the real progress that we’ve made, we know it’s not enough. Our economy doesn’t work as well or grow as fast when a few prosper at the expense of a growing middle class and ladders for folks who want to get into the middle class. That’s the economic argument. But stark inequality is also corrosive to our democratic ideal. While the top 1 percent has amassed a bigger share of wealth and income, too many of our families, in inner cities and in rural counties, have been left behind—the laid off factory worker, the waitress or health care worker who’s just barely getting by and struggling to pay the bills—convinced that the game is fixed against them, that their Government only serves the interests of the powerful. That’s a recipe for more cynicism and polarization in our politics.                                                                                                                                         |        22 |
+| But there are no quick fixes to this long-term trend. I agree, our trade should be fair and not just free. But the next wave of economic dislocations won’t come from overseas. It will come from the relentless pace of automation that makes a lot of good, middle class jobs obsolete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |        23 |
+| And so we’re going to have to forge a new social compact to guarantee all our kids the education they need, to give workers the power to unionize for better wages, to update the social safety net to reflect the way we live now, and make more reforms to the Tax Code so corporations and individuals who reap the most from this new economy don’t avoid their obligations to the country that’s made their very success possible.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |        24 |
+| We can argue about how to best achieve these goals. But we can’t be complacent about the goals themselves. For if we don’t create opportunity for all people, the disaffection and division that has stalled our progress will only sharpen in years to come.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |        25 |
+| There’s a second threat to our democracy, and this one is as old as our Nation itself. After my election, there was talk of a postracial America. And such a vision, however well intended, was never realistic. Race remains a potent and often divisive force in our society. Now, I’ve lived long enough to know that race relations are better than they were 10 or 20 or 30 years ago, no matter what some folks say. You can see it not just in statistics, you see it in the attitudes of young Americans across the political spectrum.                                                                                                                                                                                                                                                                                                                                                                                                                          |        26 |
+| But we’re not where we need to be. And all of us have more work to do. If every economic issue is framed as a struggle between a hardworking white middle class and an undeserving minority, then workers of all shades are going to be left fighting for scraps while the wealthy withdraw further into their private enclaves. If we’re unwilling to invest in the children of immigrants, just because they don’t look like us, we will diminish the prospects of our own children, because those Brown kids will represent a larger and larger share of America’s workforce. And we have shown that our economy doesn’t have to be a zero-sum game. Last year, incomes rose for all races, all age groups, for men and for women.                                                                                                                                                                                                                                    |        27 |
+| So if we’re going to be serious about race going forward, we need to uphold laws against discrimination: in hiring and in housing and in education and in the criminal justice system. That is what our Constitution and our highest ideals require. But laws alone won’t be enough. Hearts must change. It won’t change overnight. Social attitudes oftentimes take generations to change. But if our democracy is to work, the way it should, in this increasingly diverse Nation, then each one of us need to try to heed the advice of a great character in American fiction, Atticus Finch, who said, “You never really understand a person until you consider things from his point of view . . . until you climb into his skin and walk around in it.”                                                                                                                                                                                                            |        28 |
+| For Blacks and other minority groups, that means tying our own very real struggles for justice to the challenges that a lot of people in this country face, not only the refugee or the immigrant or the rural poor or the transgender American, but also the middle-aged White guy who, from the outside, may seem like he’s got advantages, but has seen his world upended by economic and cultural and technological change. We have to pay attention and listen.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |        29 |
+| For White Americans, it means acknowledging that the effects of slavery and Jim Crow didn’t suddenly vanish in the sixties, that when minority groups voice discontent, they’re not just engaging in reverse racism or practicing political correctness. When they wage peaceful protest, they’re not demanding special treatment, but the equal treatment that our Founders promised.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |        30 |
+| For native-born Americans, it means reminding ourselves that the stereotypes about immigrants today were said, almost word for word, about the Irish and Italians and Poles, who it was said were going to destroy the fundamental character of America. And as it turned out, America wasn’t weakened by the presence of these newcomers; these newcomers embraced this Nation’s creed, and this Nation was strengthened.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |        31 |
+| So regardless of the station that we occupy, we all have to try harder. We all have to start with the premise that each of our fellow citizens loves this country just as much as we do; that they value hard work and family just like we do; that their children are just as curious and hopeful and worthy of love as our own.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |        32 |
+| And that’s not easy to do. For too many of us, it’s become safer to retreat into our own bubbles, whether in our neighborhoods or on college campuses or places of worship or especially our social media feeds, surrounded by people who look like us and share the same political outlook and never challenge our assumptions. And the rise of naked partisanship and increasing economic and regional stratification, the splintering of our media into a channel for every taste—all this makes this great sorting seem natural, even inevitable. And increasingly, we become so secure in our bubbles that we start accepting only information, whether it’s true or not, that fits our opinions, instead of basing our opinions on the evidence that is out there.                                                                                                                                                                                                 |        33 |
+| And this trend represents a third threat to our democracy. But politics is a battle of ideas. That’s how our democracy was designed. In the course of a healthy debate, we prioritize different goals, and the different means of reaching them. But without some common baseline of facts, without a willingness to admit new information and concede that your opponent might be making a fair point, and that science and reason matter, then we’re going to keep talking past each other, and we’ll make common ground and compromise impossible.                                                                                                                                                                                                                                                                                                                                                                                                                    |        34 |
+| And isn’t that part of what so often makes politics dispiriting? How can elected officials rage about deficits when we propose to spend money on preschool for kids, but not when we’re cutting taxes for corporations? How do we excuse ethical lapses in our own party, but pounce when the other party does the same thing? It’s not just dishonest, this selective sorting of the facts; it’s self-defeating. Because, as my mom used to tell me, reality has a way of catching up with you. Take the challenge of climate change. In just 8 years, we’ve halved our dependence on foreign oil, we’ve doubled our renewable energy, we’ve led the world to an agreement that has the promise to save this planet. But without bolder action, our children won’t have time to debate the existence of climate change. They’ll be busy dealing with its effects: more environmental disasters, more economic disruptions, waves of climate refugees seeking sanctuary. |        35 |
+| Now, we can and should argue about the best approach to solve the problem. But to simply deny the problem not only betrays future generations, it betrays the essential spirit of this country, the essential spirit of innovation and practical problem-solving that guided our Founders.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |        36 |
+| It is that spirit, born of the Enlightenment, that made us an economic powerhouse: the spirit that took flight at Kitty Hawk and Cape Canaveral, the spirit that cures disease and put a computer in every pocket.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |        37 |
+| It’s that spirit, a faith in reason and enterprise and the primacy of right over might, that allowed us to resist the lure of fascism and tyranny during the Great Depression; that allowed us to build a post-World War II order with other democracies, an order based not just on military power or national affiliations, but built on principles: the rule of law, human rights, freedom of religion and speech and assembly, and an independent press.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |        38 |
+| That order is now being challenged, first by violent fanatics who claim to speak for Islam, more recently by autocrats in foreign capitals who see free markets and open democracies and civil society itself as a threat to their power. The peril each poses to our democracy is more far-reaching than a car bomb or a missile. They represent the fear of change; the fear of people who look or speak or pray differently; a contempt for the rule of law that holds leaders accountable; an intolerance of dissent and free thought; a belief that the sword or the gun or the bomb or the propaganda machine is the ultimate arbiter of what’s true and what’s right.                                                                                                                                                                                                                                                                                             |        39 |
+| Because of the extraordinary courage of our men and women in uniform, because of our intelligence officers and law enforcement and diplomats who support our troops, no foreign terrorist organization has successfully planned and executed an attack on our homeland these past 8 years. And although Boston and Orlando and San Bernardino and Fort Hood remind us of how dangerous radicalization can be, our law enforcement agencies are more effective and vigilant than ever. We have taken out tens of thousands of terrorists, including bin Laden. The global coalition we’re leading against ISIL has taken out their leaders and taken away about half their territory. ISIL will be destroyed, and no one who threatens America will ever be safe.                                                                                                                                                                                                         |        40 |
+| And to all who serve or have served, it has been the honor of my lifetime to be your Commander in Chief. And we all owe you a deep debt of gratitude.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |        41 |
+| But protecting our way of life, that’s not just the job of our military. Democracy can buckle when it gives in to fear. So, just as we, as citizens, must remain vigilant against external aggression, we must guard against a weakening of the values that make us who we are.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |        42 |
+| And that’s why, for the past 8 years, I’ve worked to put the fight against terrorism on a firmer legal footing. That’s why we’ve ended torture, worked to close Gitmo, reformed our laws governing surveillance to protect privacy and civil liberties. That’s why I reject discrimination against Muslim Americans, who are just as patriotic as we are. \[Applause\]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |        43 |
+| That’s why we cannot withdraw from big global fights: to expand democracy and human rights and women’s rights and LGBT rights. No matter how imperfect our efforts, no matter how expedient ignoring such values may seem, that’s part of defending America. For the fight against extremism and intolerance and sectarianism and chauvinism are of a piece with the fight against authoritarianism and nationalist aggression. If the scope of freedom and respect for the rule of law shrinks around the world, the likelihood of war within and between nations increases, and our own freedoms will eventually be threatened.                                                                                                                                                                                                                                                                                                                                        |        44 |
+| So let’s be vigilant, but not afraid. ISIL will try to kill innocent people. But they cannot defeat America unless we betray our Constitution and our principles in the fight. Rivals like Russia or China cannot match our influence around the world, unless we give up what we stand for and turn ourselves into just another big country that bullies smaller neighbors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |        45 |
+| Which brings me to my final point: Our democracy is threatened whenever we take it for granted. All of us, regardless of party, should be throwing ourselves into the task of rebuilding our democratic institutions. When voting rates in America are some of the lowest among advanced democracies, we should be making it easier, not harder, to vote. When trust in our institutions is low, we should reduce the corrosive influence of money in our politics and insist on the principles of transparency and ethics in public service. When Congress is dysfunctional, we should draw our congressional districts to encourage politicians to cater to common sense and not rigid extremes.                                                                                                                                                                                                                                                                       |        46 |
+| But remember, none of this happens on its own. All of this depends on our participation; on each of us accepting the responsibility of citizenship, regardless of which way the pendulum of power happens to be swinging.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |        47 |
+| Our Constitution is a remarkable, beautiful gift, but it’s really just a piece of parchment. It has no power on its own. We, the people, give it power. We, the people, give it meaning with our participation and with the choices that we make and the alliances that we forge. Whether or not we stand up for our freedoms, whether or not we respect and enforce the rule of law, that’s up to us. America is no fragile thing, but the gains of our long journey to freedom are not assured.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |        48 |
+| In his own Farewell Address, George Washington wrote that self-government is the underpinning of our safety, prosperity, and liberty, but “from different causes and from different quarters much pains will be taken . . . to weaken in your minds the conviction of this truth.” And so we have to preserve this truth with “jealous anxiety;” that we should reject “the first dawning of every attempt to alienate any portion of our country from the rest or to enfeeble the sacred ties” that make us one.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |        49 |
+| America, we weaken those ties when we allow our political dialogue to become so corrosive that people of good character aren’t even willing to enter into public service; so coarse with rancor that Americans with whom we disagree are seen not just as misguided, but as malevolent. We weaken those ties when we define some of us as more American than others, when we write off the whole system as inevitably corrupt, and when we sit back and blame the leaders we elect without examining our own role in electing them.                                                                                                                                                                                                                                                                                                                                                                                                                                      |        50 |
+| It falls to each of us to be those anxious, jealous guardians of our democracy; to embrace the joyous task we’ve been given to continually try to improve this great Nation of ours. Because for all our outward differences, we, in fact, all share the same proud title, the most important office in a democracy: citizen. Citizen.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |        51 |
+| So, you see, that’s what our democracy demands. It needs you. Not just when there’s an election, not just when your own narrow interest is at stake, but over the full span of a lifetime. If you’re tired of arguing with strangers on the Internet, try talking with one of them in real life. If something needs fixing, then lace up your shoes and do some organizing. If you’re disappointed by your elected officials, grab a clipboard, get some signatures, and run for office yourself. Show up. Dive in. Stay at it.                                                                                                                                                                                                                                                                                                                                                                                                                                          |        52 |
+| Sometimes you’ll win. Sometimes you’ll lose. Presuming a reservoir of goodness in other people, that can be a risk, and there will be times when the process will disappoint you. But for those of us fortunate enough to have been a part of this work and to see it up close, let me tell you, it can energize and inspire. And more often than not, your faith in America, and in Americans, will be confirmed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |        53 |
+| Mine sure has been. Over the course of these 8 years, I’ve seen the hopeful faces of young graduates and our newest military officers. I have mourned with grieving families searching for answers, and found grace in a Charleston church. I’ve seen our scientists help a paralyzed man regain his sense of touch. I’ve seen wounded warriors who at points were given up for dead walk again. I’ve seen our doctors and volunteers rebuild after earthquakes and stop pandemics in their tracks. I’ve seen the youngest of children remind us through their actions and through their generosity of our obligations to care for refugees or work for peace and, above all, to look out for each other.                                                                                                                                                                                                                                                                |        54 |
+| So that faith that I placed all those years ago, not far from here, in the power of ordinary Americans to bring about change—that faith has been rewarded in ways I could not have possibly imagined. And I hope your faith has, too. Some of you here tonight or watching at home, you were there with us in 2004, in 2008, 2012; maybe you still can’t believe we pulled this whole thing off. Let me tell you, you’re not the only ones. \[Laughter\]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |        55 |
+| Michelle—Michelle LaVaughn Robinson, girl of the South Side, for the past 25 years, you have not only been my wife and mother of my children, you have been my best friend. You took on a role you didn’t ask for and you made it your own, with grace and with grit and with style and good humor. You made the White House a place that belongs to everybody. And a new generation sets its sights higher because it has you as a role model. So you have made me proud. And you have made the country proud.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |        56 |
+| Malia and Sasha, under the strangest of circumstances, you have become two amazing young women. You are smart, and you are beautiful, but more importantly, you are kind, and you are thoughtful, and you are full of passion. And you wore the burden of years in the spotlight so easily. Of all that I’ve done in my life, I am most proud to be your dad.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |        57 |
+| To Joe Biden, the scrappy kid from Scranton who became Delaware’s favorite son, you were the first decision I made as a nominee, and it was the best. Not just because you have been a great Vice President, but because in the bargain, I gained a brother. And we love you and Jill like family, and your friendship has been one of the great joys of our lives.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |        58 |
+| To my remarkable staff: For 8 years—and for some of you, a whole lot more—I have drawn from your energy, and every day I tried to reflect back what you displayed: heart and character and idealism. I’ve watched you grow up, get married, have kids, start incredible new journeys of your own. Even when times got tough and frustrating, you never let Washington get the better of you. You guarded against cynicism. And the only thing that makes me prouder than all the good that we’ve done is the thought of all the amazing things that you are going to achieve from here.                                                                                                                                                                                                                                                                                                                                                                                  |        59 |
+| And to all of you out there—every organizer who moved to an unfamiliar town, every kind family who welcomed them in, every volunteer who knocked on doors, every young person who cast a ballot for the first time, every American who lived and breathed the hard work of change—you are the best supporters and organizers anybody could ever hope for, and I will be forever grateful. Because you did change the world. You did.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |        60 |
+| And that’s why I leave this stage tonight even more optimistic about this country than when we started. Because I know our work has not only helped so many Americans, it has inspired so many Americans, especially so many young people out there, to believe that you can make a difference, to hitch your wagon to something bigger than yourselves.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |        61 |
+| Let me tell you, this generation coming up—unselfish, altruistic, creative, patriotic—I’ve seen you in every corner of the country. You believe in a fair and just and inclusive America. You know that constant change has been America’s hallmark; that it’s not something to fear but something to embrace. You are willing to carry this hard work of democracy forward. You’ll soon outnumber all of us, and I believe as a result the future is in good hands.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |        62 |
+| My fellow Americans, it has been the honor of my life to serve you. I won’t stop. In fact, I will be right there with you, as a citizen, for all my remaining days. But for now, whether you are young or whether you’re young at heart, I do have one final ask of you as your President, the same thing I asked when you took a chance on me 8 years ago. I’m asking you to believe. Not in my ability to bring about change, but in yours.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |        63 |
+| I am asking you to hold fast to that faith written into our founding documents; that idea whispered by slaves and abolitionists; that spirit sung by immigrants and homesteaders and those who marched for justice; that creed reaffirmed by those who planted flags from foreign battlefields to the surface of the Moon; a creed at the core of every American whose story is not yet written: Yes, we can.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |        64 |
+| Yes, we did. Yes, we can.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |        65 |
+| Thank you. God bless you. May God continue to bless the United States of America. Thank you.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |        66 |
+
+The Speech With Paragraphs
+
+Thank you for reading our analysis.
 
 1.  [Obama’s
     Farewell](https://www.presidency.ucsb.edu/documents/farewell-address-the-nation-from-chicago-illinois)
+
+2.  [Tidy Text](https://www.tidytextmining.com/)

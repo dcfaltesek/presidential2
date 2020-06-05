@@ -1,7 +1,7 @@
 ---
-title: "Can we "
-author: "Your names in alphabetical order with Dan"
-date: "5/29/2020"
+title: "Presidential Rhetoric and Sentiment Analysis: the Case of Barack Obama OR Talking Like a President"
+author: "Haley Daarstead, Quinn Downey, Angel Le, Mariah Samano, Simon Hutton, with Dan Faltesek"
+date: "6/5/2020"
 output: github_document
   
 ---
@@ -109,110 +109,138 @@ View(hulk)
 
 comp3<-na.omit(comparative)
 
+zomp<-bind_rows(Afinn_final, prezz_final)
 
 
 ```
 
-# How do sentiment models work?
+# Why sentiment analysis?
+The sentiment of a presidential speech is usually obvious when listening to the speech. But what if you wanted to look at the sentiment of a whole bunch of speeches at once? Listening to the speeches or reading through all the transcripts would take a very long time. We wanted to see if there was a way we could make a computer do this for us so we would have more time to look at the data. A computer can also look at words individually for importance and amount of usage, which would be very hard if not impossible to do by yourself. Developing a good sentiment lexicon would allow us to be able to see how different presidents use words differently within different contexts or even within the same context. Comparing the word usage of various presidents could be an interesting research project.
 
-Lexicons thats how, here are 5 randomly sampled words from four popular lexicons and then ours. Here is where we can add a whole bunch of text. I will :brain: use a bunch of the options to really help you see how well this works. ^[[Obama's Farewell](https://www.presidency.ucsb.edu/documents/farewell-address-the-nation-from-chicago-illinois)]
+There are already several sentiment lexicons available. Usually when analyzing speeches, people use a bunch of these lexicons and put all their analyses together. Since the different lexicons have different ways of rating words (for example, a numbered rating system versus rating the sentiment of a word as either positive or negative), this could get messy, so we wanted to see if we could develop a single lexicon that could be the best to be used for speeches so there would not be so much back and forth between the different lexicons. We chose to rate the words in our lexicon on a -5 to 5 scale. This would give words both a sentiment rating of positive or negative and a rating of how much of that word exhibits a positive or negative sentiment. 
 
-* amazing
-  + boop
+Our group created a basic sentiment lexicon for Obama speeches. This was completed through the collection of speeches from the years 2008 to 2015. Running a tfidf with the selected speeches, words were selected and then scored between -5 and 5 for their impact of positive and negative sentiment within the speech. In cases where we scored a word multiple times, the mean score was used in the final lexicon. 
 
-## Wow
+Obama’s Farewell address in 2017 was selected to compare the success of afinn and our sentiment lexicon.  ^[[Obama's Farewell](https://www.presidency.ucsb.edu/documents/farewell-address-the-nation-from-chicago-illinois)]
+The result showed high variance between the two lexicons. Overall, our analysis of the speech was significantly more positive than afinn. 
 
-### Smaller
-  
-Column 1 | Column 2 | Column 3
----------| -------- | --------
-Obama    | President| Dude
-Bush     | President| Bro
-Biden    | Vice President | Guy
+To help you understand how these lexicons funciton, here are some samples from each model works with langauge. These models are those that are used with the code that provided foundations for this project, the wonderful book and library ^[[Tidy Text](https://www.tidytextmining.com/)] Julia Slige and David Robinsion.
 
-##A variety of things
+It became clear in our early work, that a universial Presidential sentiment model was completely unworkable. 
+
 
 ```{r stuff and junk}
-knitr::kable(
-  pressy[1:4, 1:4], caption = 'A subset of our system.'
-)
 
-knitr::kable(
-  comparative[1:3, 1:3], caption = 'A subset of our system.'
-)
+
 ```
 
 
-```{r Sentiments, fig.margin=TRUE}
+```{r Sentiments}
 
 A1<-sample_n(A, 5)%>%
   mutate("type"="Afinn")
 
-A1
-
 B1<-sample_n(B, 5)%>%
   mutate("type"="NRC")
-B1
+
 C1<-sample_n(C, 5)%>%
   mutate("type"="Bing")
-C1
+
 D1<-sample_n(D, 5)%>%
   mutate("type"="Loughran")
-D1
+
 
 E1<-sample_n(pressy, 5)%>%
   mutate("type"="pressy")
-E1
+
+
+
+```
+
+```{r sentiment samples}
+knitr::kable(
+  A1[1:5, 1:3], caption = 'AFINN'
+)
+
+knitr::kable(
+  B1[1:5, 1:2], caption = 'NRC'
+)
+
+knitr::kable(
+  C1[1:5, 1:2], caption = 'BING'
+)
+
+knitr::kable(
+  D1[1:5, 1:2], caption = 'LOUGHRAN'
+)
+
+knitr::kable(
+  pressy[1:4, 1:4], caption = 'PRESSY'
+)
+
 
 
 ```
 
-```{r i said crap a lot in an ecampus lecture}
-knitr::kable(
-  A1[1:3, 1:3], caption = 'A subset of our system.'
-)
+As you can see each lexicon has very different ways of dealing with meaning. Many student projects use AFINN because of the gradient created in the values. The other models come accross as overly simplstic. 
 
-knitr::kable(
-  B1[1:5, 1:2], caption = 'A subset of our system.'
-)
-
-```
-
-## Including Plots
+## Visualizing the Speech
 
 Here is the big plot that loos super messy.
 
-```{r pressure, echo=FALSE, fig.margin=TRUE}
-ggplot(comp3, aes(reference, balance, colour=yar))+geom_jitter()
+```{r pressure, echo=FALSE, warning=FALSE}
+ggplot(comp3, aes(reference, balance, colour=yar))+geom_jitter()+ggtitle("Mean score and model difference by paragraph")
+
+
+ggplot(zomp, aes(reference, 'mean(score)', color=type))+geom_jitter()+ggtitle("Mean socore by paragraph, mean varience")
+#add title
+
+```
+
+As you can see the speech....
+
+In a comparative paragraph analysis of afinn and ours, we found that the biggest differences in the Farewell speech. 
+
+*in reference to mean variance graphic* Mean variance between afinn and our model was consistently high, with the lowest mean variance still being above 0.5. The variance suggests that there was some general agreement, but a great deal of varience between our models. There are some points, in the early 20s, where AFINN sees negative paragrpahs were we see substantially more positive. 
+
+*graph of mean score of our and afinn’s sentiment score by paragraph* This graphic demonstrates the mean score of our and afinn’s sentiment score by paragraph. It is clearly visible that the combined sentiment score by paragraph of our and afinn’s models trends heavily towards the positive. The color indicates the internal variance of the paragraph, meaning that less variance corresponds to more similar sentiment scores of individual words in the paragraph. A light color indicates higher variance within the paragraph and a darker color indicates less variance in the paragraph. It can be seen in the graphic that paragraphs with more internal variance tended to have a lower sentiment overall than paragraphs with less internal variance. This is particularly noticeable for paragraphs in the 38-46 paragraph range.
+That range of paragraphs from 38-46 corresponds to the primarily foreign policy section of the speech which contained visceral descriptions of the military, foreign opposition, and heroism. It makes sense then that paragraphs 38-46 would likely contain a large variance in positive to negative sentiment, and be generally less positive due to descriptions of foreign opponents such as ISIL.           
+It is also important to think about intra-paragraph differences. Althogh we used the paragraph level, the sentence level may be more appropraite for analysis. 
+
+Context matters greatly in presidential speeches. It is difficult for a single sentiment lexicon to capture sentiment between speeches at different events of the same president, much less between different presidents. The context of one word in speech after a mass shooting would be different than the context of the same word in the State of Union Speech. 
+
+# Discussion
+Changes in topics showed a change in rhetoric, specifically around paragraph 40, there was a large dip in the variance between the two lexicons. Illustrating this transition in Obama’s speech of rhetoric to foeriegn relations. This transition highlighted key differences between our sentiment lexicons and afinn. Our analysis that developed our sentiment lexicon looked at how Obama talked about foreign relations in different contexts. This rhetoric around foreign relations is important to note because it showed that a generic sentiment lexicon like afinn struggled to analyze it correctly. There was a stark difference in how these two scored the paragraphs, with ours scoring was more positive and their scoring was more negative. This is due to the words that would usually be more negative being more positive in the context of foriegn relations. Thus, it’s key to recognize the context and rhetorical characteristics about presidential topics when building a sentiment lexicon. 
+
+In order to create an accurate sentiment lexicon for a presidential speech, who is speaking must be taken into account. Understanding Obama’s characteristics as a speaker was important in understanding the analysis of the words. While deciding how to score the words, each of us took the time to understand the context in which Obama was using the word. The way Obama speaks and word choice is different from many other presidential speeches. His word choice would be different from that of Bush or Trump. Also, the way he uses these words or sayings to make points is unlike that of past and current presidents. The characteristics of his speaking is important to understand when giving the score on the lexicon. While speaking his pauses, or the certain phrases are spoken in a way that deliver a more positive or negative message than just the word itself. This is essential when scoring the word, because it is the difference between a 2 or 4, or -1 or -3. 
+
+There is no good way to judge the sentiment of words without the context of each speech nor taking into account how each president uses the same words in unique ways. This creates an even bigger challenge for creating one single sentiment lexicon for all presidents. Without a deeper understanding of the president, his background, and his speaking abilities, it is difficult to use generic l sentiment lexicons like AFINN. Generic sentiment lexicons do not have these aspects that understand these rhetorical characteristics that presidents utilize in their speeches.  But, it is also difficult to develop a lexicon that would fit every president, because presidents have unsimilar vocabulary and speech characterics are different. If the lexicon our group developed was applied to Bush or Trump the results would not be accurate because these presidents have different word choices and speaking characteristics than Obama. 
+
+In conclusion, the ability to create a uniform sentiment analysis for all presidents and speeches would be nearly impossible. If any presidential sentiment lexicon was developed it would have to be created for one specific president in order to get the most accurate results. 
 
 
 
+# Key Points
 
-knitr::include_graphics(
-  'https://i.kym-cdn.com/photos/images/newsfeed/000/598/653/75f.jpg',
-  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
-  dpi = NULL,
-  error = TRUE
+1. Generic Sentiment models are of limited use.
+2. Sentiment lexicons need to be field specific and validated by experts with qualitative expetise. External validation with panels would also be good. 
+3. Getting the correct level for sentiment is extremely difficult. We used paragraphs, it is unclear if this is the correct atomic unit for meaning, or if we should operate on the sentence level, or if some kind of musicological model with phrasing would be preferable. Tweets may be the ideal unit for sentiment, anything larger is questionable, the clarity of purpose of a Tweet is also well-suited for this sort of analysis. 
+4. It became clear that the complexity of the voicing across a speech is not meaningfully modeled by this sentiment process or any we have yet encountered. 
+5. Detecting when to apply multiple lexicons would be a key future approach.
+
+# Additional Materials.
+
+Included here are the dataframe that includes a paragraph by paragraph run down of the sentiment results for both models. Following that is our reference run of Obama's Farwell Address. 
+
+```{r additional materials, echo=FALSE}
+knitr::kable(
+ hulk[1:66, 1:9], caption = 'The Speech With Paragraphs'
+)
+
+knitr::kable(
+ farewell_2[1:66, 1:2], caption = 'The Speech With Paragraphs'
 )
 
 ```
 
-And it is clear that this is a graphic that says some stuff. 
-
-```{r description of what is up}
-
-ggplot(comparative, aes(1:dim(comparative)[1], balance, colour=var))+geom_jitter()
-
-
-
-```
-
-```{marginfigure, echo = TRUE}
-Here is a random side note. As you may know, I love this stuff. 
-
-
-
-
-```
-
-Values of under zero indicate that our analysis was substantially more positive than Afinn
+Thank you for reading our analysis.
